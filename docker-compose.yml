@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: smartclinic-db
+    environment:
+      POSTGRES_USER: smartclinic
+      POSTGRES_PASSWORD: smartclinic
+      POSTGRES_DB: smartclinic
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smartclinic"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: smartclinic-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: smartclinic
+      DB_PASSWORD: smartclinic
+      DB_NAME: smartclinic
+      JWT_ACCESS_SECRET: change-me-access-secret
+      JWT_REFRESH_SECRET: change-me-refresh-secret
+      JWT_ACCESS_TTL: 900s
+      JWT_REFRESH_TTL: 7d
+      AI_PROVIDER: anthropic
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_MODEL: claude-sonnet-5
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "3000:3000"
+    command: sh -c "node dist/database/run-migrations.js && node dist/main.js"
+
+volumes:
+  pgdata:
