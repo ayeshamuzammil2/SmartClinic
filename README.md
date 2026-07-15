@@ -48,30 +48,29 @@ SmartClinic addresses the day-to-day operational needs of an outpatient clinic t
 The platform is split into three deployable units — a **PostgreSQL** database, a **NestJS** API server, and a **React** single-page application — orchestrated together via Docker Compose for zero-configuration local development.
 
 ---
+2. Architecture
 
-## 2. Architecture
++------------------------+                         +------------------------+
+|                        |   ---- HTTPS/REST --->  |                        |
+|   React 18 + Vite      |                         |    NestJS Backend      |
+|   TypeScript SPA       |                         |    (REST + WS + AI)    |
+|   (localhost:5173)     |  <--- WebSocket -------  |    (localhost:3000)    |
+|                        |       (Socket.io)        |                        |
++------------------------+                         +------------------------+
+                                                                 |
+                                                                 |  SQL
+                                                                 |  (TypeORM/Prisma)
+                                                                 v
+                                                     +------------------------+
+                                                     |     PostgreSQL 15      |
+                                                     |    (localhost:5432)    |
+                                                     +------------------------+
 
-```
-┌─────────────────────┐        HTTPS / REST         ┌──────────────────────┐
-│                      │ ───────────────────────────▶│                      │
-│   React 18 + Vite    │                              │   NestJS Backend     │
-│   TypeScript SPA     │ ◀─────────────────────────── │   (REST + WS + AI)   │
-│   (localhost:5173)   │        WebSocket (Socket.io) │   (localhost:3000)   │
-│                      │ ◀───────────────────────────▶│                      │
-└─────────────────────┘                              └──────────┬───────────┘
-                                                                   │
-                                                        SQL (TypeORM/Prisma)
-                                                                   │
-                                                                   ▼
-                                                       ┌──────────────────────┐
-                                                       │   PostgreSQL 15       │
-                                                       │   (localhost:5432)    │
-                                                       └──────────────────────┘
 
-                                              ┌──────────────────────────┐
-                       AI proxy (server-side) │  Anthropic Claude /       │
-              NestJS ─────────────────────────▶  OpenAI-compatible API   │
-                                              └──────────────────────────┘
+  NestJS Backend  ---- AI proxy call (server-side) ---->  +----------------------------+
+                                                           |   Anthropic Claude /        |
+                                                           |   OpenAI-compatible API     |
+                                                           +----------------------------+                                   └──────────────────────────┘
 ```
 
 **Design principles:**
