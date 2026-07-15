@@ -48,8 +48,10 @@ SmartClinic addresses the day-to-day operational needs of an outpatient clinic t
 The platform is split into three deployable units — a **PostgreSQL** database, a **NestJS** API server, and a **React** single-page application — orchestrated together via Docker Compose for zero-configuration local development.
 
 ---
-2. Architecture
 
+## 2. Architecture
+
+```
 +------------------------+                         +------------------------+
 |                        |   ---- HTTPS/REST --->  |                        |
 |   React 18 + Vite      |                         |    NestJS Backend      |
@@ -70,7 +72,7 @@ The platform is split into three deployable units — a **PostgreSQL** database,
   NestJS Backend  ---- AI proxy call (server-side) ---->  +----------------------------+
                                                            |   Anthropic Claude /        |
                                                            |   OpenAI-compatible API     |
-                                                           +----------------------------+                                   └──────────────────────────┘
+                                                           +----------------------------+
 ```
 
 **Design principles:**
