@@ -69,7 +69,7 @@ The platform is split into three deployable units — a **PostgreSQL** database,
                                                      +------------------------+
 
 
-  NestJS Backend  ---- AI proxy call (server-side) ---->   +----------------------------+
+  NestJS Backend  ---- AI proxy call (server-side) ---->   +---------------------------+
                                                            |   Anthropic Claude /      |
                                                            |   OpenAI-compatible API   |
                                                            +---------------------------+
