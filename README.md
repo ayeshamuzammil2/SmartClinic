@@ -266,4 +266,5 @@ Docker Desktop's UI does not display table contents. Either:
 
 ## Academic Integrity Note
 
-The reflection report and system design document must be written by the team in their own words (per the course spec, AI tools may not write those). The `docs/` folder contains technical reference material (API contract, ER diagram) to help produce them — it does not replace that requirement.
+The reflection report and system design document must be written by the team in their own words (per the course spec, AI tools may not write those). The `docs/` folder contains technical reference material (API contract, ER diagram) to help produce them — it does not replace that requirement.#   S m a r t C l i n i c  
+ 
