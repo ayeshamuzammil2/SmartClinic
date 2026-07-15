@@ -56,8 +56,8 @@ The platform is split into three deployable units — a **PostgreSQL** database,
 |                        |   ---- HTTPS/REST --->  |                        |
 |   React 18 + Vite      |                         |    NestJS Backend      |
 |   TypeScript SPA       |                         |    (REST + WS + AI)    |
-|   (localhost:5173)     |  <--- WebSocket -------  |    (localhost:3000)    |
-|                        |       (Socket.io)        |                        |
+|   (localhost:5173)     |  <--- WebSocket ------- |    (localhost:3000)    |
+|                        |       (Socket.io)       |                        |
 +------------------------+                         +------------------------+
                                                                  |
                                                                  |  SQL
@@ -69,10 +69,10 @@ The platform is split into three deployable units — a **PostgreSQL** database,
                                                      +------------------------+
 
 
-  NestJS Backend  ---- AI proxy call (server-side) ---->  +----------------------------+
-                                                           |   Anthropic Claude /        |
-                                                           |   OpenAI-compatible API     |
-                                                           +----------------------------+
+  NestJS Backend  ---- AI proxy call (server-side) ---->   +----------------------------+
+                                                           |   Anthropic Claude /      |
+                                                           |   OpenAI-compatible API   |
+                                                           +---------------------------+
 ```
 
 **Design principles:**
